@@ -20,6 +20,7 @@
     "@types/multer": "^2.1.0",
     "axios": "^1.14.0",
     "concurrently": "^9.2.1",
+    "cors": "^2.8.6",
     "datauri": "^4.1.0",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
@@ -29,6 +30,7 @@
     "typescript": "^6.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/jsonwebtoken": "^9.0.10"
   }
 }
