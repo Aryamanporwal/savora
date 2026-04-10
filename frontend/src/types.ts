@@ -24,6 +24,10 @@ export interface AppContextType{
     location : LocationData | null;
     loadingLocation : boolean;
     city : string;
+    cart : ICart[] | null;
+    fetchCart : ()=> Promise<void>;
+    subTotal : number;
+    quauntity : number;
 }
 
 export interface IRestaurant {
@@ -53,5 +57,14 @@ export interface IMenuItem {
   price: number;
   isAvailable: boolean;
   createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface ICart{
+  userId: string;
+  restaurantId: string | IRestaurant;
+  itemId: string | IMenuItem;
+  quauntity: number;
+  cretedAt: Date;
   updatedAt: Date;
 }

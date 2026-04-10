@@ -68,16 +68,16 @@ const Restaurant = () => {
     }
   }, [restaurant]);
 
+  
   if (loading)
     return (
-      <div className="flex min-h-screen items-center justify-center">
+  <div className="flex min-h-screen items-center justify-center">
         <p className="text-gray-500">Loading your restaurant...</p>
       </div>
     );
-
-  if (!restaurant) {
-    return <AddRestaurant fetchMyRestaurant={fetchMyRestaurant} />;
-  }
+    if (!restaurant) {
+      return <AddRestaurant fetchMyRestaurant={fetchMyRestaurant} />;
+    }
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-6 space-y-6">
       <RestaurantProfile
@@ -86,7 +86,7 @@ const Restaurant = () => {
         isSeller={true}
       />
 
-      <RestaurantOrders restaurantId={restaurant._id} />
+      {/* <RestaurantOrders restaurantId={restaurant._id} /> */}
 
       <div className="rounded-xl bg-white shadow-sm">
         <div className="flex border-b">

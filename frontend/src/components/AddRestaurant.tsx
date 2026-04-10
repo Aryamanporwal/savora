@@ -46,7 +46,15 @@ const AddRestaurant = ({ fetchMyRestaurant }: props) => {
       toast.success("Restaurant Added successfully");
       fetchMyRestaurant();
     } catch (error: any) {
-      toast.error(error.response.data.message);
+        console.log("FULL ERROR:", error);
+
+        const message =
+          error?.response?.data?.message ||
+          error?.message ||
+          "Something went wrong";
+
+        toast.error(message);
+
     } finally {
       setSubmitting(false);
     }
