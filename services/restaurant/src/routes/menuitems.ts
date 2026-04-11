@@ -5,10 +5,10 @@ import uploadFile from "../middlewares/multer.js";
 
 const router = express.Router()
 
-router.post("/new" , isAuth , isSeller , uploadFile, addMenuItem);
+router.post("/new" , isAuth  , uploadFile, addMenuItem);
 router.get("/add/:id" , isAuth , getAllItems);
-router.delete("/:itemId" , isAuth , isSeller , deleteMenuItem);
-router.put("/status/:itemId" , isAuth , isSeller , toggleMenuItemAvailability);
+router.delete("/:itemId" , isAuth  , deleteMenuItem);
+router.put("/status/:itemId" , isAuth  , toggleMenuItemAvailability);
 
 
 export default router;
