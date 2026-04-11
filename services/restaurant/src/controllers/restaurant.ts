@@ -53,7 +53,7 @@ export const addRestraunt = TryCatch(async (req: AuthenticatedRequest, res) => {
     `${process.env.UTILS_SERVICE}/api/upload`,
     {
       buffer: fileBuffer.content,
-    }
+    },
   );
 
   const restaurant = await Restaurant.create({
@@ -86,8 +86,8 @@ export const fetchMyRestaurant = TryCatch(
     const restaurant = await Restaurant.findOne({ ownerId: req.user._id });
 
     if (!restaurant) {
-      return res.status(400).json({
-        message: "No Restaurant found",
+      return res.json({
+        restaurant: null,
       });
     }
 
@@ -102,14 +102,14 @@ export const fetchMyRestaurant = TryCatch(
         process.env.JWT_SEC as string,
         {
           expiresIn: "15d",
-        }
+        },
       );
 
       return res.json({ restaurant, token });
     }
 
     res.json({ restaurant });
-  }
+  },
 );
 
 export const updateStatusRestaurant = TryCatch(
@@ -133,7 +133,7 @@ export const updateStatusRestaurant = TryCatch(
         ownerId: req.user._id,
       },
       { isOpen: status },
-      { new: true }
+      { new: true },
     );
 
     if (!restaurant) {
@@ -146,7 +146,7 @@ export const updateStatusRestaurant = TryCatch(
       message: "Restaurant status Updated",
       restaurant,
     });
-  }
+  },
 );
 
 export const updateRestaurant = TryCatch(
@@ -162,7 +162,7 @@ export const updateRestaurant = TryCatch(
     const restaurant = await Restaurant.findOneAndUpdate(
       { ownerId: req.user._id },
       { name: name, description: description },
-      { new: true }
+      { new: true },
     );
 
     if (!restaurant) {
@@ -175,7 +175,7 @@ export const updateRestaurant = TryCatch(
       message: "Restaurant Updated",
       restaurant,
     });
-  }
+  },
 );
 
 export const getNearbyRestaurant = TryCatch(async (req, res) => {

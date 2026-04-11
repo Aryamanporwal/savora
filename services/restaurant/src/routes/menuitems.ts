@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.post("/new" , isAuth  , uploadFile, addMenuItem);
 router.get("/add/:id" , isAuth , getAllItems);
+router.get("/all/:id" , isAuth , getAllItems);
 router.delete("/:itemId" , isAuth  , deleteMenuItem);
 router.put("/status/:itemId" , isAuth  , toggleMenuItemAvailability);
 

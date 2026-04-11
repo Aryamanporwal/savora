@@ -1,28 +1,22 @@
 import express from "express";
-import cloudinary from "cloudinary";
+import cloudinary from 'cloudinary'
 
 const router = express.Router();
 
-router.post("/upload", async (req, res) => {
-  try {
-    const { buffer } = req.body;
+router.post("/upload" , async(req , res)=>{
+    try {
+        const {buffer} = req.body;
+        const cloud = await cloudinary.v2.uploader.upload(buffer)
 
-  const cloud = await cloudinary.v2.uploader.upload(
-    `data:image/jpeg;base64,${buffer}`,
-    {
-      folder: "restaurants",
+        res.json({
+            url : cloud.secure_url
+        })
+        
+    } catch (error : any) {
+        res.status(500).json({
+            message : error.message
+        })
     }
-  );
+})
 
-    return res.json({
-      url: cloud.secure_url,
-    });
-
-  } catch (error: any) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-});
-
-export default router;
+export default router
