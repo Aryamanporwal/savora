@@ -3,17 +3,17 @@ import getBuffer from "../config/datauri.js";
 import TryCatch from "../middlewares/trycatch.js";
 import Restaurant from "../models/Restaurant.js";
 import jwt from "jsonwebtoken";
-export const addRestauraunt = TryCatch(async (req, res) => {
+export const addRestraunt = TryCatch(async (req, res) => {
     const user = req.user;
     if (!user) {
         return res.status(401).json({
             message: "Unauthorized",
         });
     }
-    const existingRestaurant = await Restaurant.findOne({
+    const existingRestaunrant = await Restaurant.findOne({
         ownerId: user._id,
     });
-    if (existingRestaurant) {
+    if (existingRestaunrant) {
         return res.status(400).json({
             message: "You already have a restaurant",
         });
