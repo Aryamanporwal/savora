@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
 import { useAppData } from "../context/AppContext";
 import toast from "react-hot-toast";
@@ -45,16 +44,9 @@ const AddRestaurant = ({ fetchMyRestaurant }: props) => {
 
       toast.success("Restaurant Added successfully");
       fetchMyRestaurant();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-        console.log("FULL ERROR:", error);
-
-        const message =
-          error?.response?.data?.message ||
-          error?.message ||
-          "Something went wrong";
-
-        toast.error(message);
-
+      toast.error(error.response.data.message);
     } finally {
       setSubmitting(false);
     }

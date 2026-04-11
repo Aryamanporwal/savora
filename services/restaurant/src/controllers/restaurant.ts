@@ -5,7 +5,7 @@ import TryCatch from "../middlewares/trycatch.js";
 import Restaurant from "../models/Restaurant.js";
 import jwt from "jsonwebtoken";
 
-export const addRestauraunt = TryCatch(async (req: AuthenticatedRequest, res) => {
+export const addRestraunt = TryCatch(async (req: AuthenticatedRequest, res) => {
   const user = req.user;
 
   if (!user) {
@@ -14,11 +14,11 @@ export const addRestauraunt = TryCatch(async (req: AuthenticatedRequest, res) =>
     });
   }
 
-  const existingRestaurant = await Restaurant.findOne({
+  const existingRestaunrant = await Restaurant.findOne({
     ownerId: user._id,
   });
 
-  if (existingRestaurant) {
+  if (existingRestaunrant) {
     return res.status(400).json({
       message: "You already have a restaurant",
     });
