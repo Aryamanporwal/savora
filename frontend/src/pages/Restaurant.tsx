@@ -6,7 +6,6 @@ import AddRestaurant from "../components/AddRestaurant";
 import RestaurantProfile from "../components/RestaurantProfile";
 import MenuItems from "../components/MenuItems";
 import AddMenuItem from "../components/AddMenuItem";
-// import RestaurantOrders from "../components/RestaurantOrders";
 
 type SellerTab = "menu" | "add-item" | "sales";
 
@@ -14,9 +13,13 @@ const Restaurant = () => {
   const [restaurant, setRestaurant] = useState<IRestaurant | null>(null);
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState<SellerTab>("menu");
+  const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
 
+  // ✅ Fetch restaurant
   const fetchMyRestaurant = async () => {
     try {
+      setLoading(true);
+
       const { data } = await axios.get(
         `${restaurantService}/api/restaurant/my`,
         {
@@ -28,23 +31,24 @@ const Restaurant = () => {
 
       setRestaurant(data.restaurant || null);
 
+      // ✅ update token WITHOUT reload
       if (data.token) {
         localStorage.setItem("token", data.token);
-        window.location.reload();
       }
     } catch (error) {
       console.log(error);
+      setRestaurant(null);
     } finally {
       setLoading(false);
     }
   };
 
+  // run once
   useEffect(() => {
     fetchMyRestaurant();
   }, []);
 
-  const [menuItems, setMenuItems] = useState<IMenuItem[]>([]);
-
+  // ✅ Fetch menu items
   const fetchMenuItems = async (restaurantId: string) => {
     try {
       const { data } = await axios.get(
@@ -56,28 +60,35 @@ const Restaurant = () => {
         }
       );
 
-      setMenuItems(data);
+      // ✅ handle both response shapes
+      setMenuItems(data.items || data || []);
     } catch (error) {
       console.log(error);
+      setMenuItems([]);
     }
   };
 
+  // 🔥 FIX: trigger when restaurant id is available
   useEffect(() => {
     if (restaurant?._id) {
       fetchMenuItems(restaurant._id);
     }
-  }, [restaurant]);
+  }, [restaurant?._id]);
 
-  if (loading)
+  // loading state
+  if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <p className="text-gray-500">Loading your restaurant...</p>
       </div>
     );
+  }
 
+  // no restaurant → show form
   if (!restaurant) {
     return <AddRestaurant fetchMyRestaurant={fetchMyRestaurant} />;
   }
+
   return (
     <div className="min-h-screen bg-gray-50 px-4 py-6 space-y-6">
       <RestaurantProfile
@@ -85,8 +96,6 @@ const Restaurant = () => {
         onUpdate={setRestaurant}
         isSeller={true}
       />
-
-      {/* <RestaurantOrders restaurantId={restaurant._id} /> */}
 
       <div className="rounded-xl bg-white shadow-sm">
         <div className="flex border-b">
@@ -117,9 +126,13 @@ const Restaurant = () => {
               isSeller={true}
             />
           )}
+
           {tab === "add-item" && (
-            <AddMenuItem onItemAdded={() => fetchMenuItems(restaurant._id)} />
+            <AddMenuItem
+              onItemAdded={() => fetchMenuItems(restaurant._id)}
+            />
           )}
+
           {tab === "sales" && <p>Sales Page</p>}
         </div>
       </div>
