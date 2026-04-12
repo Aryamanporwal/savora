@@ -12,22 +12,22 @@ const OrderSchema = new Schema({
         type: String,
         required: true,
     },
-    riderId: {
-        type: String,
-        default: null,
-    },
-    riderName: {
-        type: String,
-        default: null,
-    },
-    riderPhone: {
-        type: Number,
-        default: null,
-    },
-    riderAmount: {
-        type: Number,
-        required: true,
-    },
+    // riderId: {
+    //   type: String,
+    //   default: null,
+    // },
+    // riderName: {
+    //   type: String,
+    //   default: null,
+    // },
+    // riderPhone: {
+    //   type: Number,
+    //   default: null,
+    // },
+    // riderAmount: {
+    //   type: Number,
+    //   required: true,
+    // },
     distance: {
         type: Number,
         required: true,
