@@ -4,11 +4,11 @@ export interface IOrder extends Document {
   userId: string;
   restaurantId: string;
   restaurantName: string;
-  riderId?: string | null;
-  riderPhone: number | null;
-  riderName: string | null;
+  // riderId?: string | null;
+  // riderPhone: number | null;
+  // riderName: string | null;
   distance: number;
-  riderAmount: number;
+  // riderAmount: number;
 
   items: {
     itemId: string;
@@ -35,11 +35,11 @@ export interface IOrder extends Document {
     | "placed"
     | "accepted"
     | "preparing"
-    | "ready_for_rider"
-    | "rider_assigned"
-    | "picked_up"
-    | "delivered"
-    | "cancelled";
+    // | "ready_for_rider"
+    // | "rider_assigned"
+    // | "picked_up"
+    // | "delivered"
+    // | "cancelled";
 
   paymentMethod: "razorpay" | "stripe";
   paymentStatus: "pending" | "paid" | "failed";
@@ -64,22 +64,22 @@ const OrderSchema = new Schema<IOrder>(
       type: String,
       required: true,
     },
-    riderId: {
-      type: String,
-      default: null,
-    },
-    riderName: {
-      type: String,
-      default: null,
-    },
-    riderPhone: {
-      type: Number,
-      default: null,
-    },
-    riderAmount: {
-      type: Number,
-      required: true,
-    },
+    // riderId: {
+    //   type: String,
+    //   default: null,
+    // },
+    // riderName: {
+    //   type: String,
+    //   default: null,
+    // },
+    // riderPhone: {
+    //   type: Number,
+    //   default: null,
+    // },
+    // riderAmount: {
+    //   type: Number,
+    //   required: true,
+    // },
     distance: {
       type: Number,
       required: true,
