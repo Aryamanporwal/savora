@@ -27,3 +27,5 @@ router.post("/emit" , (req , res)=>{
 
 
 })
+
+export default router;
