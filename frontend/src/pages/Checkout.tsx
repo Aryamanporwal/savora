@@ -27,7 +27,7 @@ const Checkout = () => {
   const [loadingAddress, setLoadingAddress] = useState(true);
 
   const [loadingRazorpay, setLoadingRazorpay] = useState(false);
-  const [loadingStripe, setLoadingStripe] = useState(false);
+  // const [loadingStripe, setLoadingStripe] = useState(false);
   const [creatingOrder, setCreatingOrder] = useState(false);
 
   useEffect(() => {
@@ -159,15 +159,15 @@ const Checkout = () => {
 
   // const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
-  const payWithStripe = async () => {
-    try {
-      setLoadingStripe(true);
-      const order = await createOrder("stripe");
-      if (!order) return;
+  // const payWithStripe = async () => {
+  //   try {
+  //     setLoadingStripe(true);
+  //     const order = await createOrder("stripe");
+  //     if (!order) return;
 
-      // const { orderId } = order;
+  //     // const { orderId } = order;
 
-      console.log("Stripe checkout", order)
+  //     console.log("Stripe checkout", order)
 
       // try {
       //   await stripePromise;
@@ -188,13 +188,13 @@ const Checkout = () => {
       //   console.log(error)
       //   toast.error("Payment Failed");
       // }
-    } catch (error) {
-      console.log(error);
-      toast.error("Payment failed");
-    } finally {
-      setLoadingStripe(false);
-    }
-  };
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Payment failed");
+  //   } finally {
+  //     setLoadingStripe(false);
+  //   }
+  // };
   return (
     <div className="mx-auto max-w-4xl px-4 py-6 space-y-6">
       <h1 className="text-2xl font-bold">Checkout</h1>
@@ -298,18 +298,18 @@ const Checkout = () => {
           Pay With Razorpay
         </button>
 
-        <button
+        {/* <button
           disabled={!selectedAddressId || loadingStripe || creatingOrder}
           onClick={payWithStripe}
           className="flex w-full items-center justify-center gap-2 rounded-lg bg-black py-3 text-sm font-semibold text-white hover:bg-gray-800 disabled:opacity-50"
-        >
+        > */}
           {loadingRazorpay ? (
             <BiLoader size={18} className="animate-spin" />
           ) : (
             <BiCreditCard size={18} />
           )}
           Pay With Stripe
-        </button>
+        {/* </button> */}
       </div>
     </div>
   );
